@@ -16,6 +16,8 @@ namespace App.Data
         {
             this.context = context;
             this.dbSet = context.Set<TEntity>();
+
+            this.context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         public virtual IEnumerable<TEntity> Get(
@@ -29,7 +31,6 @@ namespace App.Data
             {
                 query = query.Where(filter);
             }
-
 
             foreach (var includeProperty in includeProperties.Split
                 (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
@@ -57,13 +58,13 @@ namespace App.Data
             dbSet.Add(entity);
         }
 
-        public virtual void Update(object id,TEntity entityToUpdate)
+        public virtual void Update(object id,TEntity entityUpdated)
         {
-            TEntity entityToDelete = dbSet.Find(id);
-            if (entityToDelete != null)
+            TEntity entityFromDb = dbSet.Find(id);
+            if (entityFromDb != null)
             {
-                dbSet.Attach(entityToUpdate);
-                context.Entry(entityToUpdate).State = EntityState.Modified;
+                dbSet.Attach(entityUpdated);
+                context.Entry(entityUpdated).State = EntityState.Modified;
             }
         }
 

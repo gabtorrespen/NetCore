@@ -7,7 +7,7 @@ namespace App.Business
 {
     public interface IGeneralService
     {
-        public IEnumerable<GeneralModel> GetGenerals(string filter = null);
+        public IEnumerable<GeneralModel> GetGenerals(string filterName = null);
         public GeneralModel GetGeneral(int id);
         public int CreateGeneral(GeneralModel value);
         public int UpdateGeneral(int id, GeneralModel value);

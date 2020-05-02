@@ -29,9 +29,9 @@ namespace App.Business
             };
         }
 
-        public IEnumerable<GeneralModel> GetGenerals(string filter = null)
+        public IEnumerable<GeneralModel> GetGenerals(string filterName = null)
         {
-            return generalRepository.Get(general => general.Name == filter).Select(general => new GeneralModel
+            return generalRepository.Get(general => general.Name == (filterName??general.Name)).Select(general => new GeneralModel
             {
                 Id = general.Id,
                 Name = general.Name,
