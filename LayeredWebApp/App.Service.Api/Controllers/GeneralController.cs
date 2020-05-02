@@ -22,9 +22,9 @@ namespace App.Service.Api.Controllers
 
         // GET: api/General
         [HttpGet]
-        public IEnumerable<GeneralModel> Get()
+        public IEnumerable<GeneralModel> Get([FromQuery]string name = null)
         {
-            List<GeneralModel> generals = generalService.GetGenerals().ToList();
+            List<GeneralModel> generals = generalService.GetGenerals(name).ToList();
             return generals;
         }
 
